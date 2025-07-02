@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <title>Fun Generating Platform Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; background: #121212; color: white;
+    }
+    #loginPanel, #mainPanel {
+      padding: 20px;
+    }
+    #loginPanel {
+      max-width: 400px; margin: 50px auto; background: #222; border-radius: 8px;
+    }
+    label, input {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      width: 100%;
+    }
+    input {
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background: #0a84ff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #errorMsg {
+      color: #ff5555;
+      margin-bottom: 10px;
+    }
+    #navBar {
+      background: #222;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #navBar button {
+      background: #0a84ff;
+      margin-left: 10px;
+      font-size: 14px;
+      padding: 6px 12px;
+    }
+    #coinsDisplay {
+      font-weight: bold;
+    }
+    #contentArea {
+      padding: 20px;
+    }
+    .hidden { display: none; }
+    #friendsList, #gamesList, #storeItems, #studioItems {
+      margin-top: 10px;
+    }
+    #friendsList div, #gamesList div, #storeItems div, #studioItems div {
+      background: #333;
+      padding: 8px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #studioCanvas {
+      border: 1px solid #444;
+      background: #111;
+      margin-top: 15px;
+      width: 100%;
+      height: 300px;
+      user-select: none;
+      position: relative;
+    }
+    .model {
+      position: absolute;
+      width: 50px; height: 50px;
+      background: cyan;
+      border-radius: 5px;
+      border: 1px solid white;
+      text-align: center;
+      line-height: 50px;
+      cursor: pointer;
+      user-select: none;
+    }
+    #storeItems .item, #friendsList .friend {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #storeItems button, #friendsList button {
+      background: #0a84ff;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    #adminPanel label, #adminPanel input {
+      margin-top: 10px;
+    }
+    #adminPanel button {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loginPanel">
+  <h2>Welcome to Fun Generating</h2>
+  <div id="errorMsg"></div>
+  <label>Username:</label>
+  <input type="text" id="usernameInput" />
+  <label>Password:</label>
+  <input type="password" id="passwordInput" />
+  <button id="loginBtn">Sign In / Register</button>
+  <p style="margin-top:10px; font-size: 14px; color: #aaa;">
+    If username doesn't exist, an account will be created.
+  </p>
+</div>
+
+<div id="mainPanel" class="hidden">
+  <div id="navBar">
+    <div>
+      <button id="studioBtn">Studio</button>
+      <button id="playBtn">Play</button>
+      <button id="storeBtn">Store</button>
+      <button id="friendsBtn">Friends</button>
+    </div>
+    <div>
+      Coins: <span id="coinsDisplay">0</span>
+      <button id="logoutBtn" style="margin-left:15px; background:#f44336;">Logout</button>
+    </div>
+  </div>
+
+  <div id="contentArea">
+    <!-- Studio -->
+    <div id="studioArea" class="hidden">
+      <h3>Studio Mode - Create Models</h3>
+      <p>Right click on a model to set Hat Name and Description.</p>
+      <button id="addModelBtn">Add Model</button>
+      <div id="studioCanvas"></div>
+      <h4>Your Models:</h4>
+      <div id="studioItems"></div>
+    </div>
+
+    <!-- Play -->
+    <div id="playArea" class="hidden">
+      <h3>Play Mode</h3>
+      <p>Games you played before:</p>
+      <div id="gamesList"></div>
+      <p>Earn 10 coins per game played!</p>
+      <button id="playGameBtn" disabled>Play Selected Game</button>
+    </div>
+
+    <!-- Store -->
+    <div id="storeArea" class="hidden">
+      <h3>Store - Buy Clothes with Coins</h3>
+      <div id="storeItems"></div>
+      <h4>Your Owned Clothes:</h4>
+      <div id="ownedClothes"></div>
+    </div>
+
+    <!-- Friends -->
+    <div id="friendsArea" class="hidden">
+      <h3>Friends</h3>
+      <input id="friendUsernameInput" placeholder="Add friend by username" />
+      <button id="addFriendBtn">Add Friend</button>
+      <div id="friendsList"></div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="hidden">
+      <h3>Admin Panel</h3>
+      <label>Promote user to admin:</label>
+      <input type="text" id="promoteUsername" placeholder="Username" />
+      <button id="promoteBtn">Promote</button>
+
+      <label>Ban user:</label>
+      <input type="text" id="banUsername" placeholder="Username" />
+      <button id="banBtn">Ban</button>
+
+      <label>Give coins:</label>
+      <input type="text" id="coinsUsername" placeholder="Username" />
+      <input type="number" id="coinsAmount" placeholder="Amount" />
+      <button id="giveCoinsBtn">Give Coins</button>
+    </div>
+  </div>
+</div>
+
+<script src="fun_generating_part2.js"></script>
+
+</body>
+</html>
